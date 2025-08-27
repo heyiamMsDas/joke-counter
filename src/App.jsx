@@ -60,11 +60,11 @@ function Counter() {
   return (  
       <div>
      <div style={{display:'flex' , justifyContent:'center' , alignItems:'center'}}>
-  <button  style={{width:400, height:400 , display: 'flex' , justifyContent:'center' , alignItems:'center'}}  onClick={()=> setCount(count + 1)}>
+  <button  style={{width:400, height:400 , display: 'flex' , justifyContent:'center' , alignItems:'center' , marginBottom:'15px'}}  onClick={()=> setCount(count + 1)}>
        <p style={{fontSize:60 , fontWeight:400}}> {count} </p>
   </button>
     </div>
- <p style={{fontSize:20 , backgroundColor:'#f7e499ff' , color:'black'}}>{ loading ? "Loading...": quote }</p>
+ <p style={{fontSize:20 , backgroundColor:'#f7e499ff' , color:'black', display: 'flex' , alignItems:'center' , justifyContent:'center' , borderRadius:5 , minHeight: 80 , padding:10 ,margin:'0 auto' , width:500}}>{ loading ? "Loading...": quote }</p>
   </div>
 
   )
