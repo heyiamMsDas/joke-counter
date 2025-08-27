@@ -14,12 +14,13 @@ function Counter() {
 
   const [count , setCount] = useState(0) ;
   const [quote , setQuote] = useState('') ;
+  const [loading , setLoading] = useState(false) ;
 
   useEffect(() => {
 
     const timer = setInterval(() => {
         setCount(prev => prev + 1) ;
-    }, 6000);
+    }, 8000);
     return ()=> clearInterval(timer);
   } 
 
@@ -27,6 +28,7 @@ function Counter() {
 
    useEffect(() => {
     async function fetchQuote() {
+        setLoading(true) ;
         try {
             const res = await fetch('https://v2.jokeapi.dev/joke/Any');
             const data = await res.json();
@@ -40,10 +42,15 @@ function Counter() {
             else {
                 setQuote("No joke found!");
             }
-        } catch (error) {
+        }
+        catch (error) {
             console.error('Error fetching quote:', error);
             setQuote('Failed to fetch quote');
         }
+        finally {
+            setLoading(false) ;
+        }
+
     }
     fetchQuote();
 }, [count]);
@@ -51,12 +58,15 @@ function Counter() {
 
 
   return (  
+      <div>
      <div style={{display:'flex' , justifyContent:'center' , alignItems:'center'}}>
   <button  style={{width:400, height:400 , display: 'flex' , justifyContent:'center' , alignItems:'center'}}  onClick={()=> setCount(count + 1)}>
        <p style={{fontSize:60 , fontWeight:400}}> {count} </p>
   </button>
-  <p>{quote}</p>
+    </div>
+ <p style={{fontSize:20 , backgroundColor:'#f7e499ff' , color:'black'}}>{ loading ? "Loading...": quote }</p>
   </div>
+
   )
 
 }
